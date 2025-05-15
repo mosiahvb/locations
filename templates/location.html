@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location finder</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='location.css') }}">
+</head>
+
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='img/PMB-Logo.png') }}" alt="PMB Logo" width="200">
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="/">Locations</a></li>
+                <li><a href="/update">Go to Updates</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Find Product Location</h1>
+        <p>To find a Product location please enter the product number below for example: 22-EXT-001BKS</p>
+
+        <section class="request">
+
+            <h2>Enter Here</h2>
+            <input type="text" id="productNumber" placeholder="Enter product number">
+            <section class="button_container">
+                <button onclick="findLocation()">Search</button>
+            </section>
+            
+            <div id="result"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 | Mosiah Valdez-Bates | USA 
+    </footer>
+
+
+    <script>
+        // Submit the part request to find the Location 
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+
+
+        function findLocation() {
+            const productNumber = document.getElementById("productNumber").value;
+
+            // Connects to my function on the backend sending a POST request
+            // Converting the input into json. 
+            fetch('/get-location', { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ product_number: productNumber })
+            })
+
+            // The response from my backend is returned, then separated for use
+            // In the HTML. If an error occurs, it is handled and a product not 
+            // found is added to the HTML
+            .then(response => response.json())
+            .then(data => {
+                const resultElement = document.getElementById("result");
+                const locations = data.location;
+                if (locations && locations.length > 0) {
+                    resultElement.innerHTML = '<ul>' +
+                        locations.map(loc => `<li>${loc}</li>`).join('') + 
+                        "</ul>";
+
+                } else {
+                    resultElement.textContent = 'Product not found.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updates</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='location.css') }}">
+    
+</head>
+<body>
+    
+    <header>
+        <img src="{{ url_for('static', filename='img/PMB-Logo.png') }}" alt="PMB Logo" width="200">
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="/">Locations</a></li>
+                <li><a href="/update">Go to Updates</a></li>
+                <!-- <li><a href="#">Packaging</a></li> -->
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>Perform Updates Here</h1>
+
+        <section class="add">
+            <h2>Add a new part and location </h2>
+            <div class="input_group">
+                <input type="text" id="productNumber" placeholder="Enter product number">
+                <input type="text" id="productLocation" placeholder="Enter product Location">
+            </div>
+
+            <section class="button_container">
+                <button onclick="addPartAndLocation()">Add</button>
+            </section>
+
+            <div id="result"></div>
+        </section>
+
+        <section class="change">
+            <h2>Change a products location</h2>
+            <div class="input_group">
+                <input type="text" id="changeProductNumber" placeholder="Enter product number">
+                <input type="text" id="changeProductLocation" placeholder="Enter product Location">
+                <input type="text" id="newLocation" placeholder="Enter New Location">
+            </div>
+
+            <section class="button_container">
+                <button onclick="changeLocation()">Change</button>
+            </section>
+
+            <div id="changedresult"></div>
+
+        </section>
+
+        <section class="remove">
+            <h2>Remove a part and location</h2>
+            <div class="input_group">
+                <input type="text" id="removeProductNumber" placeholder="Enter product number">
+                <input type="text" id="removeProductLocation" placeholder="Enter product Location">
+            </div>
+
+            <section class="button_container">
+                <button onclick="removePartAndLocation()">Delete</button>
+            </section>
+            
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 | Mosiah Valdez-Bates | USA 
+    </footer>
+
+    <script>
+
+        // Request to add parts and location to database 
+        function addPartAndLocation() {
+
+            const productNumberInput = document.getElementById("productNumber");
+            const productLocationInput = document.getElementById("productLocation");
+            
+            const productNumber = productNumberInput.value;
+            const productLocation = productLocationInput.value;
+
+
+            // Confirms the user wants to perform the action
+            const confirmed = confirm(`Are you sure you want to ADD:\n\nProduct Number: ${productNumber}\nLocation: ${productLocation}?`);
+            if (!confirmed) {
+                return; // Stop if user clicks "Cancel"
+            }
+            
+            fetch('/add-part', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ product_number: productNumber, product_location: productLocation})
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+            
+                    } else {
+                        alert(data.message);
+                    }
+                });
+
+                productNumberInput.value = "";
+                productLocationInput.value = "";
+        }
+
+        // Request to change a product location
+        function changeLocation(){
+            const productNumberInput = document.getElementById("changeProductNumber");
+            const productLocationInput = document.getElementById("changeProductLocation");
+            const newLocationInput = document.getElementById("newLocation");
+
+            const productNumber = productNumberInput.value;
+            const productLocation = productLocationInput.value
+            const productNewLocation = newLocationInput.value
+
+            // Confirms the user wants to perform the action
+            const confirmed = confirm(`Are you sure you want to CHANGE:\n\nProduct Number: ${productNumber}\nLocation: ${productLocation}?\nLocation: ${productNewLocation}?`);
+            if (!confirmed) {
+                return; // Stop if user clicks "Cancel"
+            }
+
+            fetch('/change-location', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ product_number: productNumber, product_location: productLocation, new_Location: productNewLocation})
+                })
+                .then(res => res.json())
+
+                // Should I get rid of this? 
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+            
+                    } else {
+                        alert(data.message);
+                    }
+                });
+
+                productNumberInput.value = "";
+                productLocationInput.value = "";
+                newLocationInput.value = "";
+
+        }
+
+
+
+        // Request to remove part from database 
+        function removePartAndLocation() {
+            const productNumberInput = document.getElementById("removeProductNumber");
+            const productLocationInput = document.getElementById("removeProductLocation");
+            
+            const productNumber = productNumberInput.value;
+            const productLocation = productLocationInput.value
+
+            // Confirms the user wants to perform the action
+            const confirmed = confirm(`Are you sure you want to DELETE:\n\nProduct Number: ${productNumber}\nLocation: ${productLocation}?`);
+            if (!confirmed) {
+                return; // Stop if user clicks "Cancel"
+            }
+
+            fetch('/remove-part', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ product_number: productNumber, product_location: productLocation})
+                })
+                .then(res => res.json())
+
+                // Should I get rid of this? 
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+            
+                    } else {
+                        alert(data.message);
+                    }
+                });
+
+                productNumberInput.value = "";
+                productLocationInput.value = "";
+
+
+
+
+        }
+        
+    </script>
+</body>
+</html>
