@@ -80,6 +80,10 @@
     <script>
 
         // Request to add parts and location to database 
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+
         function addPartAndLocation() {
 
             const productNumberInput = document.getElementById("productNumber");
