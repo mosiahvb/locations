@@ -1,0 +1,152 @@
+body {
+    background-color: whitesmoke;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* NAV */
+nav {
+    background-color: white;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* Hamburger always on left */
+.hamburger {
+    /* font-size: 26px;
+    cursor: pointer;
+    padding: 10px; */
+    display: none;
+}
+
+/* Center the nav links */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Takes up remaining space */
+    list-style: none;
+    gap: 60px; /* Space between links */
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure links are centered and evenly spaced */
+.nav-links li {
+    flex: 1;
+    text-align: center;
+}
+
+/* Link styling*/
+.nav-links li a {
+    position: relative; /* Needed for pseudo-element positioning */
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+/* Create the red underline as a pseudo-element */
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 5px; /* Adjust as needed to match your layout */
+    width: 0;
+    height: 2px;
+    background-color: red;
+    transition: width 0.4s ease;
+}
+
+/* On hover, expand the underline */
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+
+    .hamburger{
+        display: block;
+        font-size: 26px;
+        cursor: pointer;
+        padding: 10px;
+    }
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        flex: unset;
+        text-align: left;
+    }
+}
+
+h1 , h2, p {
+    text-align: center;
+}
+
+
+.finder_info {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+.info {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    justify-content: center; /* Center inputs horizontally */
+    margin-bottom: 10px;
+}
+h3 {
+    margin-bottom: 0;
+}
+p {
+    margin-bottom: 0;
+    font-size: larger;
+}
+.video-container{
+    padding: 10px;
+}
+
+
+
+footer {
+
+    text-align: center;
+}

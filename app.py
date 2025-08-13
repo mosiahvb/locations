@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return render_template('location.html') # this renders the html page you created
+    return render_template('location.html') # this renders the html page i created
 
 # Handles the get location request, returning the locations of the product selected
 @app.route('/get-location', methods=['POST'])
@@ -69,6 +69,9 @@ def removepart():
         return jsonify({"error": "Item not found to delete."}), 500
 
 
+@app.route('/about')
+def about_page():
+    return render_template('about.html') # Renders the updates page 
 
 
 

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='about.css') }}">
+    
+</head>
+<body>
+    
+    <header>
+        <img src="{{ url_for('static', filename='img/PMB-Logo.png') }}" alt="PMB Logo" width="200">
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <div class="hamburger" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="/">Locations</a></li>
+                <li><a href="/update">Go to Updates</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <h1>User Instructions</h1>
+
+        <section class="finder_info">
+            <h2>How to Use the Locations Page</h2>
+            <div class="info">
+                    
+                    <p>
+                      The <strong>Locations</strong> page helps you find the shelf location of products that already have a documented storage spot. 
+                      If a product is <strong>new</strong> or <strong>doesn’t have a location assigned</strong>, you’ll first need to create a location for it 
+                      and then update its assigned spot using this page. For help with that process, see the <strong>"Adding Locations"</strong> section below.
+                    </p>
+                  
+                    <h3>Finding a Product’s Location</h3>
+                    <ol>
+                      <li>
+                        <strong>Identify the Part Number</strong>
+                        <ul>
+                          <li>Look it up in <strong>Odoo</strong></li>
+                          <li>Or check the product’s physical label</li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <strong>Search for the Part</strong>
+                        <ul>
+                          <li>Click the open search field on the Locations page</li>
+                          <li>Enter the part number</li>
+                          <li>Note: The search is not case-sensitive. Just make sure the number matches what's shown in Odoo or on the label</li>
+                          <li>Click Search</li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <strong>Read the Results</strong>
+                        <ul>
+                            <li>Search results will appear just below the Search button in the format: #-A-# (for example: 3-A-5)</li>
+                            <li>First Number = Shelf row number (e.g., Row 3)</li>
+                            <li>Letter = Side of the shelf (A = front, B = back)</li>
+                            <li>Last Number = Slot number where the item is stored</li>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <strong>Locate and Verify</strong>
+                        <ul>
+                            <li>Go to the indicated shelf and slot. Inside the slot, you’ll find:</li>
+                            <li>The slot number</li>
+                            <li>The name of the product</li>
+                            <li>Double-check that the product in the slot matches what’s listed.</li>
+                        </ul>
+                      </li>
+
+                    </ol>
+                  
+                <div class="video-container">
+                    <iframe src="#" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+            </div>
+
+            <h2> How to make updates on the Updates page</h2>
+
+            <div class="info">
+                <h3>Adding a new part and location</h3>
+                <p>
+                    The following will walk you through how to add a new part to the Finder.
+                </p>
+
+                <ol>
+                    <li>
+                        <strong>Enter the Part Number</strong>
+                        <ul>
+                            <li>In the "Enter Part Number" field, type the part number exactly as it appears in Odoo</li>
+                            <li>Make sure it matches Odoo formatting to ensure proper tracking</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Assign a Location</strong>
+                        <ul>
+                            <li>Enter the shelf location where the part will be stored using the format: Shelf-Section-Slot (Example: 1-A-3)</li>
+                            <li>Shelf = Row number</li>
+                            <li>Section = A (front) or B (back)</li>
+                            <li>Slot = Specific position on the shelf</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Add the Part</strong>
+                        <ul>
+                            <li>Click the Add button</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Verify the Information</strong>
+                        <ul>
+                            <li>A popup will appear asking you to confirm the details you entered</li>
+                            <li>Carefully check for accuracy, then click Submit</li>
+                            <li>Once submitted, the new part and its assigned location will be added to the system database.</li>
+                        </ul>
+                    </li>
+
+                </ol>
+
+                <div class="video-container">
+                    <iframe src="#" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="info">
+                <h3>Changing a products location</h3>
+                <p>
+                    If you need to update the location of a product, please keep the following in mind:
+                    Only one location is updated at a time. If the product exists in multiple locations, 
+                    only the specific instance you select will be updated. To update all locations for a 
+                    product, you will need to make changes one location at a time.
+                </p>
+
+                <ol>
+                    <li>
+                        <strong>Enter the Part Number</strong>
+                        <ul>
+                            <li>In the "Enter Part Number" field, type the part number exactly as it appears in Odoo</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Enter the Current Location</strong>
+                        <ul>
+                            <li>Input the product’s current location (e.g., 1-B-23) in the "Current Location" field</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Enter the New Location</strong>
+                        <ul>
+                            <li>In the "Enter New Location" field, type the new shelf location where the part should be moved (e.g., 2-A-10)</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Apply the Change</strong>
+                        <ul>
+                            <li>Click the Change button</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Review and Confirm</strong>
+                        <ul>
+                            <li>A popup will appear asking you to verify the information</li>
+                            <li>Review the details for accuracy, then click Confirm</li>
+                        </ul>
+                    </li>
+
+                </ol>
+               
+                <div class="video-container">
+                    <iframe src="#" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="info">
+                <h3>Removeing a part and location</h3>
+                <p>
+                    When removing a product from a specific location, please note: Only the selected location is 
+                    removed. If the part exists in multiple locations, you’ll need to remove each one individually. 
+                    For example: If part 3015 is stored in five different slots, you must delete each slot entry 
+                    one at a time.
+                </p>
+
+                <ol>
+                    <li>
+                        <strong>Enter the Part Number</strong>
+                        <ul>
+                            <li>In the "Enter Part Number" field, type the part number exactly as it appears in Odoo</li>
+                            <li>Make sure to verify the number in Odoo before continuing</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Enter the Product’s Location</strong>
+                        <ul>
+                            <li>In the "Enter Product Location" field, input the current location of the part (e.g., 2-A-7)</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Delete the Entry</strong>
+                        <ul>
+                            <li>Click the Delete button</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Review and Confirm</strong>
+                        <ul>
+                            <li>A popup will appear asking you to confirm the removal</li>
+                            <li>Double-check the details, then click Confirm to permanently remove the part from that location</li>
+                            <li>The selected product and location entry has now been successfully deleted from the system</li>
+
+                        </ul>
+                    </li>
+
+                </ol>
+
+                <div class="video-container">
+                    <iframe src="#" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 | Mosiah Valdez-Bates | USA 
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('show');
+        }
+    </script>
+
+</body>
+</html>
