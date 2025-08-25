@@ -1,5 +1,6 @@
 import sqlite3
 
+# The following are the functions created to querry the database and answer the users questions.
 # Add a part and location to the database
 def add_item(part,location):
     '''
